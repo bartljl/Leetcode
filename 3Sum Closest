@@ -1,0 +1,49 @@
+public int threeSumClosest(int[] num, int target) 
+{
+        
+        int closest = Integer.MAX_VALUE;
+        int size = num.length;
+        int retval = num[0] + num[1] + num[2];
+        
+        Arrays.sort(num);
+        
+        if(size == 3) return retval;
+        
+        for(int i = 0; i < size - 1; i++)
+        {
+            int start = i + 1;
+            int end = size - 1;
+            
+            while(start < end)
+            {
+                int threesum = num[i] + num[start] + num[end];
+                int dist = 0;
+                
+                if(threesum > target)
+                {
+                    dist = threesum - target;
+                    
+                    end--;
+                }
+                else if(threesum < target)
+                {
+                    dist = target - threesum;
+                    
+                    start++;
+                }
+                else
+                {
+                    return threesum;
+                }
+                
+                if(dist <= closest)
+                {
+                    closest = dist;
+                    retval = threesum;
+                }
+                
+            }
+        }
+        
+        return retval;
+    }
